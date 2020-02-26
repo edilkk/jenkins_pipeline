@@ -1,7 +1,6 @@
 node {
     stage("Say Hello"){
-        properties([pipelineTriggers([githubPush(), pollSCM('* * * * *')])])
-        sh "echo Hello ${NAME}",
-        sh "do something"
+        properties([parameters([string(defaultValue: 'Ed', description: 'Please paste ur name', name: 'NAME', trim: false)]), pipelineTriggers([cron('* * * * *')])])
+        sh "echo Hello ${NAME}"
     }
 }
